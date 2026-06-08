@@ -1,0 +1,65 @@
+// Read Only Properties
+
+// <!-- You may sometimes wish to block users of your interface from reassigning
+//  properties of objects adhering to that interface. TypeScript allows
+//  you to add a readonly modifier before a property name to indicate
+//  that once set, that property should not be set to a different value.
+
+//  These readonly properties can be read from normally, but not reassigned to anything new. -->
+
+//______________________________________________________________________________________________________________
+
+// eg 1
+
+// For example, the text property in the below Page interface gives back a string when accessed,
+//  but causes a type error if assigned a new value:
+
+/* interface Page {
+  readonly text: string;
+}
+
+function read(page: Page) {
+  // Ok: reading the text property doesn't attempt to modify it
+  console.log(page.text);
+
+  page.text += "!";
+  //   ~~~~
+  // Error: Cannot assign to 'text'
+  // because it is a read-only property.
+} */
+
+//______________________________________________________________________________________________________________
+
+// eg 2
+// In this continuation of the read example, the text property is allowed to be modified outside of the
+//  read function because its parent object isn’t explicitly described as a Text until inside the function.
+//  pageIsh is allowed to be used as a Page because a writable property is assignable
+//  to a readonly property (mutable properties can be read from, which is all a readonly property needs):
+
+/* interface Page {
+  readonly text: string;
+}
+
+function read(page: Page) {
+  // Ok: reading the text property doesn't attempt to modify it
+  console.log(page.text);
+
+  page.text += "!";
+  //   ~~~~
+  // Error: Cannot assign to 'text'
+  // because it is a read-only property.
+}
+
+const pageIsh = {
+  text: "Hello, world!",
+};
+
+// Ok: pageIsh is an inferred object type with text, not a Page
+page.text += "!";
+
+// Ok: read takes in Page, which happens to
+// be a more specific version of pageIsh's type
+read(pageIsh); */
+
+// Declaring the variable pageIsh with the explicit type annotation : Page would have indicated
+//  to TypeScript that its text property was readonly. Its inferred type, however, was not readonly.
