@@ -1,0 +1,30 @@
+// Optional Properties
+
+// As with object types, interface properties don’t all have to be required in the object.
+//  You can indicate an interface’s property is optional by including a ? before the : in its type annotation.
+
+//______________________________________________________________________________________________________________
+
+// eg 1
+
+// This Book interface requires only a pages property and optionally allows an author.
+// Objects adhering to it may provide author or leave it out as long as they provide pages:
+
+/* interface Book {
+  author?: string;
+  pages: number;
+}
+
+// Ok
+const ok: Book = {
+  author: "Rita Dove",
+  pages: 80,
+};
+
+const missing: Book = {
+  author: "Rita Dove",
+};
+// Error: Property 'pages' is missing in type
+// '{ author: string; }' but required in type 'Book'. */
+
+//______________________________________________________________________________________________________________
